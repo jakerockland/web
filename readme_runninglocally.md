@@ -6,10 +6,8 @@
 git clone https://github.com/gitcoinco/web.git
 cd web
 cp app/app/local.env app/app/.env
-docker-compose up -d --build
+docker-compose up -d
 ```
-
-Create a Django admin user: `docker-compose exec web python3 app/manage.py createsuperuser`
 
 Navigate to `http://0.0.0.0:8000/`.
 
@@ -27,9 +25,7 @@ cp app/local.env app/.env
 
 You will need to edit the `app/.env` file with your local environment variables. Look for config items that are marked `# required`.
 
-Create a Django admin user: `python3 manage.py createsuperuser`
-
-## Setup Github OAuth2 App Integration
+### Setup Github OAuth2 App Integration
 
 Navigate to: [Github - New Application](https://github.com/settings/applications/new) and enter similar values to:
 
@@ -42,14 +38,14 @@ The authorization callback URL should match your `BASE_URL` value in `local_sett
 
 Set `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, and `GITHUB_APP_NAME` to the returned values.
 
-## Setup Github User Integration
+### Setup Github User Integration
 
 Navigate to:  [Github - New Token](https://github.com/settings/tokens/new)
 At minimum, select `user` scope.
 Generate your token and copy it to:  `GITHUB_API_TOKEN`
 Copy your Github username to:  `GITHUB_API_USER`
 
-## Rollbar Integration
+### Rollbar Integration
 
 Error tracking is entirely optional and primarily for internal staging and production tracking.
 If you would like to track errors of your local environment, setup an account at: [Rollbar.com](https://rollbar.com)
@@ -64,7 +60,7 @@ Once you have access to your project access tokens, you can enable rollbar error
   * `ROLLBAR_CLIENT_TOKEN = os.environ.get('ROLLBAR_CLIENT_TOKEN', '<post_client_item>')`
   * `ROLLBAR_SERVER_TOKEN = os.environ.get('ROLLBAR_SERVER_TOKEN', '<post_server_item>')`
 
-## Static Asset Handling
+### Static Asset Handling
 
 If you're testing in a staging or production style environment behind a CDN, pass the `DJANGO_STATIC_HOST` environment variable to your django web instance specifying the CDN URL.
 
@@ -72,7 +68,7 @@ For example:
 
 `DJANGO_STATIC_HOST='https://gitcoin.co`
 
-## Setup Database
+### Setup Database
 
 PostgreSQL is the database used by this application. Here are some instructions for installing PostgreSQL on various operating systems.
 
@@ -117,7 +113,7 @@ DATABASES = {
 }
 ```
 
-## Startup server
+### Startup server
 
 ```shell
 virtualenv gcoin
@@ -133,7 +129,7 @@ pip install -r requirements/test.txt
 
 Navigate to `http://localhost:8000/`.
 
-## Optional: Import bounty data from web3 to your database
+### Optional: Import bounty data from web3 to your database
 
 This can be useful if you'd like data to test with:
 
@@ -141,7 +137,7 @@ This can be useful if you'd like data to test with:
 ./manage.py sync_geth mainnet 0 99999999999
 ```
 
-## Gitcoinbot Installation Instructions
+### Gitcoinbot Installation Instructions
 
 The following environment variables must be set for gitcoinbot to work correctly
 
